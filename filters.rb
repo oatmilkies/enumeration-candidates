@@ -5,7 +5,7 @@ require './candidates'
 
 # Returns the candidate with :id. If none, returns nil
   def find(id)
-      result = @candidates.find {|candidate| candidate[:id] == id}
+      result = @candidates.find { |candidate| candidate[:id] == id }
   end
   
   # Returns true if the candidate has 2 years of experience or more. Returns false otherwise
@@ -31,10 +31,18 @@ require './candidates'
       candidate[:age] > 17
     end
   end
-  
-  # More methods will go below
 
+  #Sorts candidates with the most experience are at the top
+  #For Candidates that have the same years of experience, they are further sorted by their number of Github points
+  def ordered_by_qualifications(candidates)
+    sorted = candidates.sort_by{ |candidate| [-candidate[:years_of_experience], -candidate[:github_points]]}
+    return sorted
+  end
+
+
+# Tests
 puts find(5)
 puts experienced?(@candidates[0])
 puts experienced?(@candidates[1])
 p qualified_candidates(@candidates)
+puts ordered_by_qualifications(@candidates)
