@@ -3,13 +3,17 @@
 
 require './candidates'
 
+# Returns the candidate with :id. If none, returns nil
   def find(id)
-      # Returns the candidate with :id. If none, returns nil
       result = @candidates.find {|candidate| candidate[:id] == id}
   end
   
+  # Returns true if the candidate has 2 years of experience or more. Returns false otherwise
   def experienced?(candidate)
-    # Your code Here
+    if candidate[:years_of_experience] >= 2
+      return true
+    end
+    false
   end
   
   def qualified_candidates(candidates)
@@ -19,3 +23,8 @@ require './candidates'
   # More methods will go below
 
 puts find(5)
+puts experienced?(@candidates[0])
+puts experienced?(@candidates[1])
+
+#puts @candidates[2]
+#puts @candidates[2][:years_of_experience]
